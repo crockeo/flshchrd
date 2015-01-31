@@ -4,9 +4,22 @@
 // Includes //
 #include <exception>
 #include <fstream>
+#include <sstream>
 
 //////////
 // Code //
+
+// Reading in a line!
+std::string readLine(std::istream& in) {
+    std::ostringstream str;
+
+    while (in.peek() != '\r' && in.peek() != '\n')
+        str << (char)in.get();
+    if (in.peek() == '\r' || in.peek() == '\n')
+        in.get();
+
+    return str.str();
+}
 
 // Creating a new deck from an existent set of questions.
 Deck::Deck(std::map<std::string, std::string> questions) :
@@ -18,9 +31,9 @@ Deck::Deck(std::istream&& in) throw(std::runtime_error) {
         throw std::runtime_error("Input stream is not good.");
 
     std::string question, answer;
-    while (!in.eof()) {
-        in >> question;
-        in >> answer;
+    while (!in.eof() && in.peek() != -1) {
+        question = readLine(in);
+        answer   = readLine(in);
 
         this->questions[question] = answer;
     }

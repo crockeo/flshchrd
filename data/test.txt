@@ -1,0 +1,4 @@
+What is the worst case running time of a Bubble Sort?
+O(n^2)
+Why are you hot?
+'Cause I'm fly.
