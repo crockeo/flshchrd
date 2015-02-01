@@ -15,11 +15,18 @@ int main(int argc, char** argv) {
     } else {
         Deck d(argv[1]);
 
-        std::cout << d.isEmpty() << std::endl;
+        std::cout << "isEmpty():" << std::endl;
+        std::cout << "  " << d.isEmpty() << std::endl;
 
+        std::cout << "getMap():" << std::endl;
         auto map = d.getMap();
         for (auto it = map.begin(); it != map.end(); it++)
-            std::cout << std::get<0>(*it) << " | " << std::get<1>(*it) << std::endl;
+            std::cout << "  " << std::get<0>(*it) << " | " << std::get<1>(*it) << std::endl;
+
+        std::cout << "generateAnswers():" << std::endl;
+        auto vec = d.generateAnswers(d.getQuestion(0), 1);
+        for (auto& a: vec)
+            std::cout << "  " << a << std::endl;
 
         return 0;
     }

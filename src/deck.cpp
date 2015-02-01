@@ -2,7 +2,7 @@
 
 //////////////
 // Includes //
-#include <exception>
+#include <cstdlib>
 #include <fstream>
 #include <sstream>
 
@@ -61,13 +61,32 @@ std::string Deck::getQuestion(int index) const {
     auto it = this->questions.begin();
     for (int i = 0; i < index; i++)
         it++;
-    return std::get<1>(*it);
+    return std::get<0>(*it);
 }
 
 // Generating a set of 'answers' for a question. Only one of the returned
 // strings will be the correct answer.
-std::vector<std::string> Deck::generateAnswers(std::string question) const {
-    return std::vector<std::string>();
+std::vector<std::string> Deck::generateAnswers(std::string question, int extras) const throw(std::logic_error) {
+    if (extras > this->questions.size() - 1)
+        throw std::logic_error("The number of extra answers exceeds the number of extra questions.");
+
+    std::vector<std::string> answers;
+
+    answers.push_back(this->questions.at(question));
+    std::string q;
+
+    for (int i = 0; i < extras; i++) {
+        q = this->getQuestion(rand() % this->questions.size());
+
+        if (q.compare(question) == 0) {
+            i--;
+            continue;
+        }
+
+        answers.push_back(this->questions.at(q));
+    }
+
+    return answers;
 }
 
 // Getting a copy of the question map.

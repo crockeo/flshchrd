@@ -3,6 +3,7 @@
 
 //////////////
 // Includes //
+#include <exception>
 #include <istream>
 #include <string>
 #include <vector>
@@ -40,7 +41,7 @@ public:
 
     // Generating a set of 'answers' for a question. Only one of the returned
     // strings will be the correct answer.
-    std::vector<std::string> generateAnswers(std::string) const;
+    std::vector<std::string> generateAnswers(std::string, int) const throw(std::logic_error);
 
     // Getting a copy of the question map.
     std::map<std::string, std::string> getMap() const;
