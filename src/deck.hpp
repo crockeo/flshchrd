@@ -30,6 +30,9 @@ public:
     // Creating a new, empty deck.
     Deck();
 
+    // Getting the size of the deck.
+    int size() const;
+
     // Getting the answer to a question.
     std::string getAnswer(std::string) const;
 

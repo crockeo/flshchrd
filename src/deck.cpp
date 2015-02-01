@@ -46,6 +46,9 @@ Deck::Deck(std::string str) throw(std::runtime_error)
 // Creating a new, empty deck.
 Deck::Deck() { }
 
+// Getting the size of the deck.
+int Deck::size() const { return this->questions.size(); }
+
 // Getting the answer to a question.
 std::string Deck::getAnswer(std::string question) const {
     return this->questions.at(question);
